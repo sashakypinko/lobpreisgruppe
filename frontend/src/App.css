@@ -1,0 +1,24 @@
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@font-face {
+  font-family: "Volvo Novum";
+  src: url("/fonts/volvo-novum-regular.woff2") format("woff2"),
+  url("/fonts/volvo-novum-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
