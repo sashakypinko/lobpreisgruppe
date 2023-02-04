@@ -1,4 +1,5 @@
 const setupCors = (res, origin) => {
+  console.log(origin)
   res.writeHeader('Access-Control-Allow-Origin', `${origin}`)
     .writeHeader('Access-Control-Allow-Credentials', 'true')
     .writeHeader('Access-Control-Allow-Headers', 'origin, content-type, accept,'
