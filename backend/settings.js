@@ -1,6 +1,6 @@
 export default {
   local: {
-    MONGO_URL: 'mongodb://localhost:27017',
+    MONGO_URL: 'mongodb+srv://alixander:62596572@cluster0.ezckx.mongodb.net/?retryWrites=true&w=majority',
     dbName: 'lobpreisgruppe',
     // dbName: 'lobpreisgruppe_production',
     apiPrefix: '/api',
