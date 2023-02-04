@@ -1,6 +1,15 @@
-import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { Card, CardActions, CardContent, Chip, Grid, IconButton, Stack, Typography } from '@mui/material';
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Chip,
+  Grid,
+  IconButton,
+  Stack,
+  Typography,
+  Rating,
+} from '@mui/material';
 import {
   CheckCircleRounded, EditRounded,
   RadioButtonUncheckedRounded,
@@ -20,7 +29,7 @@ const styles = {
   cardActions: {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '17px',
+    padding: '17px 0 17px 17px',
   },
   cardContent: {},
   schedulerRow: {
@@ -40,6 +49,8 @@ const styles = {
 const GREEN_PERIOD = 30;
 const YELLOW_PERIOD = 20;
 
+const calculateRating = ratings =>  ratings.map(({ rating }) => rating).reduce((a, b) => a + b, 0) / ratings.length;
+
 const SongsViewCard = ({
   song,
   isSelected,
@@ -48,8 +59,8 @@ const SongsViewCard = ({
   onTagClick,
   onLangClick,
   onSelectSong,
+  onUpdateRating,
 }) => {
-  const { t } = useTranslation();
   const classes = useClasses(styles);
 
   const getLastUsingDateColor = lastUsingDate => {
@@ -72,6 +83,7 @@ const SongsViewCard = ({
     tags,
     lang = '',
     lastUsingDate,
+    ratings = [],
   } = song;
 
   const date = lastUsingDate ? new Date(lastUsingDate).toLocaleDateString('de', {
@@ -79,6 +91,8 @@ const SongsViewCard = ({
     day: '2-digit',
     year: 'numeric',
   }) : false;
+
+  const rating = calculateRating(ratings);
 
   return (
     <Card sx={{
@@ -139,13 +153,21 @@ const SongsViewCard = ({
               size="small"
               onClick={() => onLangClick(lang)}
             />
+            <Rating
+              value={rating}
+              precision={0.5}
+              onChange={(e, val) => onUpdateRating(_id, val || rating)}
+            />
             <span>
               {
-                date && <Chip label={date} color={getLastUsingDateColor(lastUsingDate)}/>
+                date && <Chip size="small" label={date} color={getLastUsingDateColor(lastUsingDate)}/>
               }
               {
                 selectedDate && (
-                  <IconButton onClick={() => onSelectSong(song, !isSelected)}>
+                  <IconButton
+                    style={{padding: '0 0 0 7px !important'}}
+                    onClick={() => onSelectSong(song, !isSelected)}
+                  >
                     {
                       isSelected
                         ? <CheckCircleRounded color="success"/>
@@ -172,4 +194,5 @@ SongsViewCard.propTypes = {
   onTagClick: PropTypes.func,
   onLangClick: PropTypes.func,
   onSelectSong: PropTypes.func,
+  onUpdateRating: PropTypes.func,
 };

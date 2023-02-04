@@ -1,12 +1,8 @@
-import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { Grid } from '@mui/material';
 
-import useClasses from '@/components/layout/hooks/useClasses';
 import SongsViewCard from '@/screens/songs/SongsViewCard';
 import SongsEditCard from '@/screens/songs/SongsEditCard';
-
-const styles = {};
 
 const SongsList = ({
   songs,
@@ -17,9 +13,6 @@ const SongsList = ({
   Loading,
   ...rest
 }) => {
-  const { t } = useTranslation();
-  const classes = useClasses(styles);
-
   if (loading) return <Loading/>;
 
   return (

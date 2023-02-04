@@ -16,6 +16,7 @@ import useSnackbar from '@/components/dialogs/snackbars/hooks/useSnackbar';
 import DateHelper from '@/components/helpers/DateHelper';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { useUserData } from '@/screens/users/hooks/userDataHooks';
 
 const styles = {
   textField: {
@@ -54,7 +55,7 @@ const Songs = ({
     languages: [],
     sort: {
       name: 'name',
-      value: 1
+      value: 1,
     },
   };
   const [songs, setSongs] = useState([]);
@@ -67,6 +68,7 @@ const Songs = ({
     Loading,
     setLoading,
   } = useLoading();
+  const { _id } = useUserData();
 
   const getSongs = async () => {
     setLoading(true);
@@ -204,6 +206,30 @@ const Songs = ({
     !inModal && setSelectedSongs([]);
   };
 
+  const handleUpdateRating = async (id, rating) => {
+    const res = await Connections.postRequest(ApiEndpoints.updateRating, { _id: id, rating });
+
+    if (res.ok) {
+      const songIdx = songs.findIndex(song => song._id === id);
+      const ratingIdx = songs[songIdx].ratings.findIndex(({ userId }) => userId === _id);
+      setSongs([
+        ...songs.slice(0, songIdx),
+        {
+          ...songs[songIdx],
+          ratings: [
+            ...songs[songIdx].ratings.slice(0, ratingIdx),
+            {
+              userId: _id,
+              rating,
+            },
+            ...songs[songIdx].ratings.slice(ratingIdx + 1),
+          ],
+        },
+        ...songs.slice(songIdx + 1),
+      ]);
+    }
+  };
+
   return (
     <>
       <div className={classes.spaceBetween}>
@@ -245,6 +271,7 @@ const Songs = ({
           onTagClick={handleTagClick}
           onLangClick={handleLangClick}
           onSelectSong={handleSelectSong}
+          onUpdateRating={handleUpdateRating}
         />
       </Grid>
     </>

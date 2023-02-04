@@ -26,6 +26,17 @@ const SongSchema = {
       },
     },
     lastUsingDate: date,
+    ratings: {
+      bsonType: 'array',
+      items: {
+        bsonType: 'object',
+        required: ['userId', 'rating'],
+        properties: {
+          userId: _id,
+          rating: basicNumber,
+        },
+      },
+    },
     updatedAt: date,
     createdAt: date,
   },

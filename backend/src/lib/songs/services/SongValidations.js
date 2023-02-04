@@ -19,7 +19,11 @@ const SongValidations = {
   async validateUpdate(ctx) {
     const { song } = ctx.request.body;
     const {
-      createdAt, updatedAt, lastUsingDate, _id, ...restOfSong
+      createdAt,
+      updatedAt,
+      lastUsingDate,
+      _id,
+      ...restOfSong
     } = song;
 
     ctx.state.song = restOfSong;
@@ -75,6 +79,27 @@ const SongValidations = {
     const { songs } = ctx.request.body;
 
     ctx.state.songs = songs;
+
+    return true;
+  },
+
+  async validateUpdateRating(ctx) {
+    const {
+      _id,
+      rating
+    } = ctx.request.body;
+
+    const existingSong = await ctx.libS.songs.getById(_id);
+
+    ctx.modS.responses.createValidateError(existingSong, ctx, ctx.modS.responses.CustomErrors.NOT_FOUND);
+
+    if (!existingSong.ratings) {
+      existingSong.ratings = [];
+    }
+    existingSong.lastUsingDate = new Date(existingSong.lastUsingDate);
+    ctx.state.song = existingSong;
+    ctx.state.rating = rating;
+    ctx.state._id = _id;
 
     return true;
   },

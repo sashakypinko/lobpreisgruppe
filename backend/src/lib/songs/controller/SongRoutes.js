@@ -43,6 +43,13 @@ const SongRoutes = createBasicRoutes(
         validation: SongValidations.validateRemove,
         handler: SongController.remove,
       },
+      {
+        method: 'post',
+        path: '/updateRating',
+        authentication: true,
+        validation: SongValidations.validateUpdateRating,
+        handler: SongController.updateRating,
+      },
     ],
   },
 );

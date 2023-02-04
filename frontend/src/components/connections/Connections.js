@@ -19,6 +19,7 @@ export const ApiEndpoints = {
   getSongs: '/songs/getByQuery',
   createSongs: '/songs/create',
   updateSongs: '/songs/update',
+  updateRating: '/songs/updateRating',
   getAllTranslations: '/translations/all',
   getTranslationsList: '/translations/getLanguageList',
   getTranslationByLanguage: '/translations/getByLanguage',

@@ -15,6 +15,7 @@ class SongServices extends ServicesBase {
       lang: 1,
       tags: 1,
       lastUsingDate: 1,
+      ratings: 1,
     },
   };
 }

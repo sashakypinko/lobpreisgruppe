@@ -34,7 +34,7 @@ const SongController = {
     const { songs } = ctx.state;
     songs.forEach(song => {
       (async () => {
-        await ctx.libS.songs.add(song);
+        await ctx.libS.songs.add({ ...song, ratings: [] });
         await ctx.libS.tags.update(ctx, song.tags);
       })();
     });
@@ -55,6 +55,33 @@ const SongController = {
   async remove(ctx) {
     const { _id } = ctx.state;
     await ctx.libS.songs.removeById(_id);
+    return ctx.modS.responses.createSuccessResponse(ctx);
+  },
+
+  async updateRating(ctx) {
+    const { _id, song, rating } = ctx.state;
+    const { user } = ctx.privateState;
+    const ratingIdx = song.ratings.findIndex(({userId}) => userId.toString() === user._id.toString());
+
+    console.log(ratingIdx)
+
+    if (ratingIdx === -1) {
+      song.ratings.push({
+        userId: user._id,
+        rating,
+      });
+    } else {
+      song.ratings = [
+        ...song.ratings.slice(0, ratingIdx),
+        {
+          ...song.ratings[ratingIdx],
+          rating,
+        },
+        ...song.ratings.slice(ratingIdx + 1),
+      ];
+    }
+
+    await ctx.libS.songs.update({ _id, ...song });
     return ctx.modS.responses.createSuccessResponse(ctx);
   },
 };
