@@ -8,6 +8,7 @@ const setupRouteHandlers = (app, mongoSetup) => {
     const { path, method, steps } = route;
 
     app[method](path, (res, req) => {
+      console.log('routes')
       let isAborted = false;
       res.onAborted(() => {
         console.error('ABORTED!');
