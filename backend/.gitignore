@@ -15,7 +15,6 @@
 .DS_Store
 .cache
 .project
-.settings
 .tmproj
 nbproject
 Thumbs.db
