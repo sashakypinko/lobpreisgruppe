@@ -29,6 +29,12 @@ const SongValidations = {
     ctx.state.song = restOfSong;
     ctx.state._id = _id;
 
+    (ctx.state.song.ratings || []).map(rating => {
+      rating.userId = ctx.libS.songs.helpers.getObjectId(rating.userId);
+
+      return rating;
+    })
+
     const existingSong = await ctx.libS.songs.getById(_id, { projection: { _id: 1 } });
 
     ctx.modS.responses.createValidateError(existingSong, ctx, ctx.modS.responses.CustomErrors.NOT_FOUND);
@@ -96,7 +102,11 @@ const SongValidations = {
     if (!existingSong.ratings) {
       existingSong.ratings = [];
     }
-    existingSong.lastUsingDate = new Date(existingSong.lastUsingDate);
+
+    if (existingSong.lastUsingDate) {
+      existingSong.lastUsingDate = new Date(existingSong.lastUsingDate);
+    }
+
     ctx.state.song = existingSong;
     ctx.state.rating = rating;
     ctx.state._id = _id;

@@ -6,7 +6,7 @@ import AuthenticationHelpers from '#lib/authentications/services/AuthenticationH
 
 const { ObjectId } = mongodb;
 
-const activeSessionMinutes = 60;
+const activeSessionDays = 100;
 
 class AuthenticationServices extends ServicesBase {
   helpers = {
@@ -24,7 +24,7 @@ class AuthenticationServices extends ServicesBase {
       {
         _id: ObjectId(token),
         active: true,
-        lastActivity: { $gte: DateHelper.getBefore({ minutes: activeSessionMinutes }) },
+        lastActivity: { $gte: DateHelper.getBefore({ days: activeSessionDays }) },
       },
       {
         $set: {

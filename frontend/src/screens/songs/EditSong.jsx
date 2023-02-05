@@ -20,6 +20,9 @@ import { SongLanguages } from '@/screens/songs/enums/SongEnums';
 import CustomSelect from '@/components/inputs/CustomSelect';
 
 const styles = {
+  container: {
+    margin: 0,
+  },
   title: {
     marginBottom: '10px',
   },
@@ -162,7 +165,12 @@ const EditSong = () => {
             lang,
           }, index) => {
             return (
-              <Grid container spacing={2} key={`song_row_${index}`}>
+              <Grid
+                container
+                spacing={2}
+                key={`song_row_${index}`}
+                className={classes.container}
+              >
                 <Grid item xs={6} md={3}>
                   <CustomTextField
                     uiLibrary="mui"
@@ -176,20 +184,6 @@ const EditSong = () => {
                     fullWidth
                     className={classes.textField}
                     error={isError(`name_${index}`)}
-                  />
-                </Grid>
-                <Grid item xs={6} md={4}>
-                  <CustomCheckboxAutocomplete
-                    options={tags.map(tagName => ({
-                      key: tagName,
-                      name: tagName,
-                    }))}
-                    value={songTags}
-                    label={t('tags')}
-                    openOnFocus
-                    onChange={({ value }) => handleChangeTags(value, index)}
-                    size="small"
-                    freeSolo
                   />
                 </Grid>
                 <Grid item xs={6} md={4}>
@@ -209,7 +203,21 @@ const EditSong = () => {
                     error={isError(`lang_${index}`)}
                   />
                 </Grid>
-                <Grid item xs={6} md={1}>
+                <Grid item xs={9} md={4}>
+                  <CustomCheckboxAutocomplete
+                    options={tags.map(tagName => ({
+                      key: tagName,
+                      name: tagName,
+                    }))}
+                    value={songTags}
+                    label={t('tags')}
+                    openOnFocus
+                    onChange={({ value }) => handleChangeTags(value, index)}
+                    size="small"
+                    freeSolo
+                  />
+                </Grid>
+                <Grid item xs={3} md={1}>
                   <IconButton
                     aria-label="remove"
                     className={classes.actionButton}

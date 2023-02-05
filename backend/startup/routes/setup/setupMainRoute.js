@@ -3,7 +3,6 @@ import setupCors from '../../startupHelpers/setupCors';
 const setupMainRoute = app => {
   app.any('/', (res, req) => {
     let isAborted = false;
-    console.log('request')
     res.onAborted(() => {
       console.error('ABORTED!');
       isAborted = true;

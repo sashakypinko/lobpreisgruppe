@@ -49,7 +49,8 @@ const styles = {
 const GREEN_PERIOD = 30;
 const YELLOW_PERIOD = 20;
 
-const calculateRating = ratings =>  ratings.map(({ rating }) => rating).reduce((a, b) => a + b, 0) / ratings.length;
+const calculateRating = ratings => ratings.map(({ rating }) => rating)
+  .reduce((a, b) => a + b, 0) / ratings.length;
 
 const SongsViewCard = ({
   song,
@@ -96,7 +97,7 @@ const SongsViewCard = ({
 
   return (
     <Card sx={{
-      maxWidth: 345,
+      maxWidth: 365,
       marginBottom: '10px',
     }}>
       <CardContent className={classes.cardContent}>
@@ -160,12 +161,17 @@ const SongsViewCard = ({
             />
             <span>
               {
-                date && <Chip size="small" label={date} color={getLastUsingDateColor(lastUsingDate)}/>
+                date && <Chip
+                  style={{ marginRight: selectedDate ? 0 : '10px' }}
+                  size="small"
+                  label={date}
+                  color={getLastUsingDateColor(lastUsingDate)}
+                />
               }
               {
                 selectedDate && (
                   <IconButton
-                    style={{padding: '0 0 0 7px !important'}}
+                    style={{ padding: '0 0 0 7px !important' }}
                     onClick={() => onSelectSong(song, !isSelected)}
                   >
                     {

@@ -7,9 +7,16 @@ const PraiseValidations = {
 
     praise.songs.forEach(song => {
       song._id = ctx.libS.praises.helpers.getObjectId(song._id);
-      song.lastUsingDate = new Date(song.lastUsingDate);
+      if (song.lastUsingDate) {
+        song.lastUsingDate = new Date(song.lastUsingDate);
+      }
       song.updatedAt = new Date(song.updatedAt);
       song.createdAt = new Date(song.createdAt);
+      song.ratings = (song.ratings || []).map(rating => {
+        rating.userId = ctx.libS.songs.helpers.getObjectId(rating.userId);
+
+        return rating;
+      })
     });
     praise.date = new Date(praise.date);
     praise.confirmed = false;
