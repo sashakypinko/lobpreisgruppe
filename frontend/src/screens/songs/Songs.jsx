@@ -122,7 +122,7 @@ const Songs = ({
       );
 
       if (res.ok) {
-        createSuccessSnackbar('praises.updatedSuccessfully');
+        // createSuccessSnackbar('praises.updatedSuccessfully');
         navigate(UrlEnums.PRAISES);
       } else {
         createErrorSnackbar('praises.updatingFailed');
@@ -137,7 +137,7 @@ const Songs = ({
     const res = await Connections.postRequest(ApiEndpoints.updateSongs, { song: editableSong });
 
     if (res.ok) {
-      createSuccessSnackbar('songs.updatedSuccessfully');
+      // createSuccessSnackbar('songs.updatedSuccessfully');
       setEditableSong(null);
       await getSongs();
     } else {
