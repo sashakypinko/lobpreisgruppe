@@ -140,7 +140,7 @@ const EditSong = () => {
       const action = id === 'new' ? 'create' : 'update';
       const res = await Connections.postRequest(ApiEndpoints[`${action}Songs`], { songs });
       if (res.ok) {
-        createSuccessSnackbar(t('supplierProfiles.cantSaveSupplierProfile'));
+        // createSuccessSnackbar(t('supplierProfiles.cantSaveSupplierProfile'));
         navigate(UrlEnums.SONGS);
       } else {
         createErrorSnackbar(t('supplierProfiles.cantSaveSupplierProfile'));

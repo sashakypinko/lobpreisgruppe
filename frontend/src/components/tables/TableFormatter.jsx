@@ -695,7 +695,7 @@ export const SendNotificationFormatter = ({
     });
 
     if (res.ok) {
-      createSuccessSnackbar(t('notificationSent'));
+      // createSuccessSnackbar(t('notificationSent'));
       setIsOpen(false);
     } else {
       createErrorSnackbar(t('sendingNotificationFailed'));

@@ -78,7 +78,7 @@ const AdminTranslations = () => {
     const isOk = await onSave(openDialog);
 
     if (isOk) {
-      createSuccessSnackbar(t('translations.savedSuccessfully'));
+      // createSuccessSnackbar(t('translations.savedSuccessfully'));
     } else {
       createErrorSnackbar(t('translations.errorUpdating'));
     }

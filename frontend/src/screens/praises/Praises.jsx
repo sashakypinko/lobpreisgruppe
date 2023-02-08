@@ -48,7 +48,7 @@ const Praises = () => {
 
     if (res.ok) {
       setPraises(res.data.praises);
-      createSuccessSnackbar(t('praises.gettingPraisesSuccess'));
+      // createSuccessSnackbar(t('praises.gettingPraisesSuccess'));
     } else {
       createErrorSnackbar(t('praises.gettingPraisesFailed'));
     }
@@ -73,7 +73,7 @@ const Praises = () => {
 
     if (res.ok) {
       await getPraises();
-      createSuccessSnackbar(t('praises.updatingPraiseSuccess'));
+      // createSuccessSnackbar(t('praises.updatingPraiseSuccess'));
     } else {
       createErrorSnackbar(t('praises.updatingPraiseFailed'));
     }
@@ -88,7 +88,7 @@ const Praises = () => {
 
     if (res.ok) {
       await getPraises();
-      createSuccessSnackbar(t('praises.deletingPraiseSuccess'));
+      // createSuccessSnackbar(t('praises.deletingPraiseSuccess'));
     } else {
       createErrorSnackbar(t('praises.deletingPraiseFailed'));
     }
@@ -103,7 +103,7 @@ const Praises = () => {
 
     if (res.ok) {
       await getPraises();
-      createSuccessSnackbar(t('praises.confirmationPraiseSuccess'));
+      // createSuccessSnackbar(t('praises.confirmationPraiseSuccess'));
     } else {
       createErrorSnackbar(t('praises.confirmationPraiseFailed'));
     }

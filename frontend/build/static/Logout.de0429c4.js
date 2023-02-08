@@ -1,1 +1,0 @@
-import{ab as r,r as n,S as o,ac as s,j as u,h as c,A as i}from"./index.08fe98f9.js";const m=()=>{const t=r();return n.exports.useEffect(()=>{(async()=>{const e=o.remove(s.token),a=o.remove(s.userData);await Promise.all([e,a]),(async()=>{await c.postRequest(i.logout)})().then(()=>{(async()=>await o.clear())()}),t(null)})()},[]),u("div",{})};export{m as default};
